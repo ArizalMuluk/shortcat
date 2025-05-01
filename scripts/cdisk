@@ -1,0 +1,92 @@
+#!/bin/bash
+
+# --- Kode Warna & Style ---
+BOLD='\033[1m'
+COLOR_GREEN='\033[0;32m'
+COLOR_BLUE='\033[0;34m'
+COLOR_CYAN='\033[0;36m'
+COLOR_RED='\033[0;31m'
+COLOR_NC='\033[0m' # No Color
+
+# --- Fungsi Animasi ---
+spinners="⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏"
+spinner_index=0
+
+display_spinner() {
+    local message="$1"
+    local duration=${2:-15}
+    local loading_text="${COLOR_CYAN}loading...${COLOR_NC}"
+    
+    printf "\r%-80s" " "
+    for i in $(seq 1 $duration); do
+        frame=${spinners:$((spinner_index % 10 * 2)):1}
+        printf "\r  ${COLOR_CYAN}${frame}${COLOR_NC} ${message} ${loading_text}"
+        ((spinner_index++))
+        sleep 0.1
+    done
+    printf "\r%-80s" " "
+    printf "\r  ${message} selesai!"
+    echo ""
+}
+
+# --- Header ---
+print_header() {
+    local header_text="$1"
+    local line_char="─"
+    local width=50
+    local padding=$(( (width - ${#header_text} - 2) / 2 ))
+    local left_padding=$padding
+    local right_padding=$padding
+
+    if [ $(( (width - ${#header_text} - 2) % 2 )) -ne 0 ]; then
+        right_padding=$((right_padding + 1))
+    fi
+
+    local top_line="┌"
+    for ((i=0; i<width; i++)); do
+        top_line+="${line_char}"
+    done
+    top_line+="┐"
+
+    local bottom_line="└"
+    for ((i=0; i<width; i++)); do
+        bottom_line+="${line_char}"
+    done
+    bottom_line+="┘"
+
+    local left_pad=""
+    for ((i=0; i<left_padding; i++)); do
+        left_pad+=" "
+    done
+
+    local right_pad=""
+    for ((i=0; i<right_padding; i++)); do
+        right_pad+=" "
+    done
+
+    echo -e "${COLOR_CYAN}${top_line}${COLOR_NC}"
+    echo -e "${COLOR_CYAN}│${left_pad}${COLOR_BLUE}${BOLD}${header_text}${COLOR_NC}${right_pad}${COLOR_CYAN}│${COLOR_NC}"
+    echo -e "${COLOR_CYAN}${bottom_line}${COLOR_NC}"
+}
+
+# --- Main Script ---
+clear
+print_header "Menjalankan Cdisk (Cek Disk)"
+echo ""
+
+display_spinner "Mengumpulkan informasi disk" 20
+
+echo ""
+echo -e "${COLOR_GREEN}=== Penggunaan Ruang Disk (Partisi Penting) ===${COLOR_NC}"
+echo ""
+df -h / /home /var
+echo ""
+
+display_spinner "Menghitung ukuran direktori home" 15
+
+echo -e "${COLOR_GREEN}========= Ukuran Direktori Home Anda ==========${COLOR_NC}"
+du -sh /home /$USER 2>/dev/null
+echo -e "${COLOR_GREEN}===============================================${COLOR_NC}"
+echo ""
+
+echo -e "${COLOR_BLUE}Selesai Cek Disk.${COLOR_NC}"
