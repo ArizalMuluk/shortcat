@@ -8,7 +8,7 @@
 INSTALL_DIR="$HOME/.local/bin"
 SOURCE_SCRIPT_DIR="./scripts"
 SCRIPTS_TO_INSTALL=("simapt" "cdisk" )
-VERSION="1.0.1"
+VERSION="1.0.1 (Bahasa Indonesia)"
 DEBUG_MODE="true"  # Set ke "true" untuk menampilkan pesan debug lebih detail
 
 # --- Kode Warna & Style ---
@@ -23,6 +23,11 @@ COLOR_CYAN='\033[0;36m'
 COLOR_MAGENTA='\033[0;35m'
 COLOR_WHITE='\033[1;37m'
 COLOR_NC='\033[0m'     # No Color
+
+if [[ "$1" == "--version" || "$1" == "-v" ]]; then
+    echo "Versi skrip: $VERSION"
+    exit 0
+fi
 
 # ╔════════════════════════════════════════════════════════════════════════════╗
 # ║                             HELPER FUNCTIONS                                ║
@@ -116,8 +121,8 @@ display_spinner() {
     done
     
     # Clear spinner when done
-    printf "\r%-80s" " "
-    printf "\r  ${message}"
+    printf "\r%-80s\r" " "  # Membersihkan baris spinner
+    printf "  ${message}... [${COLOR_GREEN}${BOLD}OK${COLOR_NC}]\n"  # Tambahkan warna hijau dan bold pada [OK]
 }
 
 # Progress bar display
@@ -372,7 +377,7 @@ setup_install_dir() {
     print_header "MENYIAPKAN DIREKTORI INSTALASI"
     echo ""
     
-    display_spinner "Memeriksa/membuat direktori instalasi '$INSTALL_DIR'..." 10
+    display_spinner "Memeriksa/membuat direktori instalasi '$INSTALL_DIR'" 10
     mkdir -p "$INSTALL_DIR" > /dev/null 2>&1
     local exit_status=$?
     
@@ -383,6 +388,8 @@ setup_install_dir() {
         clean_exit 1 "Gagal membuat direktori instalasi. Instalasi dibatalkan."
     fi
     
+    echo ""
+    echo "------------------------------------------------------------"
     echo ""
 }
 
