@@ -8,7 +8,7 @@
 INSTALL_DIR="$HOME/.local/bin"
 SOURCE_SCRIPT_DIR="./scripts"
 SCRIPTS_TO_INSTALL=("simapt" "cdisk" )
-VERSION="1.1.0"
+VERSION="1.0.1"
 DEBUG_MODE="true"  # Set ke "true" untuk menampilkan pesan debug lebih detail
 
 # --- Kode Warna & Style ---

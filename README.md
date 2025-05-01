@@ -1,6 +1,6 @@
 ## Versi
 
-Versi saat ini: **v1.1.0 (Bahasa Indonesia)**
+Versi saat ini: **v1.0.1 (Bahasa Indonesia)**
 
 Catatan: Versi ini mencakup skrip `cdisk` dan `simapt` sebagai fitur utama.
 
