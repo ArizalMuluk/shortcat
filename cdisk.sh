@@ -1,14 +1,15 @@
 #!/bin/bash
 
+echo "=================== Cdisk ====================="
 echo "=== Penggunaan Ruang Disk (Partisi Penting) ==="
+echo ""
 df -h / /home /var
 
 echo ""
 
-echo "=== Ukuran Direktori Home Anda  ==="
-du -sh /home/$USER
+echo "========= Ukuran Direktori Home Anda =========="
+du -sh /home /$USER 2>/dev/null
 
-echo ""
+echo "==============================================="
+echo "Selesai Cek Disk."
 
-echo "================================="
-echo "Selesai Cek Disk"
