@@ -7,7 +7,7 @@
 # --- Konfigurasi Instalasi ---
 INSTALL_DIR="$HOME/.local/bin"
 SOURCE_SCRIPT_DIR="./scripts"
-SCRIPTS_TO_INSTALL=("simapt" "cdisk" )
+SCRIPTS_TO_INSTALL=("simapt" "cdisk" "gotask")
 VERSION="1.0.1 (Bahasa Indonesia)"
 DEBUG_MODE="true"  # Set ke "true" untuk menampilkan pesan debug lebih detail
 

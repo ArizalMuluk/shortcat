@@ -2,7 +2,7 @@
 
 # --- Konfigurasi ---
 INSTALL_DIR="$HOME/.local/bin"
-SCRIPTS_TO_UNINSTALL=("simapt" "cdisk")
+SCRIPTS_TO_UNINSTALL=("simapt" "cdisk" "gotask")
 
 # --- Kode Warna & Style ---
 BOLD='\033[1m'

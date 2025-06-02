@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Skrip untuk membuat .vscode/tasks.json
+TASKS_JSON_CONTENT='{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Current Go File",
+            "type": "shell",
+            "command": "go",
+            "args": [
+                "run",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false // Anda bisa set true jika ingin Ctrl+Shift+B langsung menjalankan ini
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "problemMatcher": [
+                "$go"
+            ]
+        }
+    ]
+}'
+
+# Nama direktori .vscode
+VSCODE_DIR=".vscode"
+# Path lengkap ke file tasks.json
+TASKS_FILE_PATH="${VSCODE_DIR}/tasks.json"
+
+# Membuat direktori .vscode jika belum ada
+if [ ! -d "$VSCODE_DIR" ]; then
+    echo "Membuat direktori ${VSCODE_DIR}..."
+    mkdir "$VSCODE_DIR"
+    if [ $? -ne 0 ]; then
+        echo "Error: Gagal membuat direktori ${VSCODE_DIR}. Keluar."
+        exit 1
+    fi
+else
+    echo "Direktori ${VSCODE_DIR} sudah ada."
+fi
+
+# Membuat atau menimpa file tasks.json
+echo "Membuat/Memperbarui file ${TASKS_FILE_PATH}..."
+printf "%s\n" "$TASKS_JSON_CONTENT" > "$TASKS_FILE_PATH"
+
+if [ $? -eq 0 ]; then
+    echo "File ${TASKS_FILE_PATH} berhasil dibuat/diperbarui."
+    echo "Anda sekarang dapat mengatur pintasan keyboard di VS Code untuk task 'Run Current Go File'."
+else
+    echo "Error: Gagal membuat file ${TASKS_FILE_PATH}."
+    exit 1
+fi
+
+exit 0
