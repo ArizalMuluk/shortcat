@@ -49,7 +49,7 @@ Cara termudah untuk memasang skrip ini adalah dengan menggunakan skrip `install.
 
 3. Masuk ke direktori hasil kloning:
    ```bash
-   cd simple-linux-commands
+   cd shortcat
    ```
 
 4. Berikan izin eksekusi pada skrip instalasi:
