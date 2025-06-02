@@ -44,7 +44,7 @@ Cara termudah untuk memasang skrip ini adalah dengan menggunakan skrip `install.
 1. Buka terminal.
 2. Kloning repositori ini ke komputer Anda:
    ```bash
-   git clone https://github.com/ArizalMuluk/simple-linux-commands.git
+   git clone https://github.com/ArizalMuluk/shortcat.git
    ```
 
 3. Masuk ke direktori hasil kloning:
